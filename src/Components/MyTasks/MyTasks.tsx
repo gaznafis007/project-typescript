@@ -1,17 +1,48 @@
+import Header from "../Header/Header"
+import TaskCard from "../TaskCard/TaskCard"
+
 interface ITask {
     taskName: string,
     taskDescription:string,
-    taskUrgency: "immediate" | "urgent" | "necessary" | "not important"
+    taskUrgency: "immediate" | "urgent" | "necessary" | "not important",
+    taskId: number
   }
   type Tasks =ITask[]
-const MyTasks = ({tasks}:{tasks: Tasks | null}) => {
+
+const MyTasks = ({tasks, setTasks}:{tasks: Tasks | null, setTasks: React.Dispatch<React.SetStateAction<Tasks | null>>}) => {
+  const handleTaskCompleted = (taskId:number) =>{
+    const newTasks = tasks?.filter(task=>task.taskId !== taskId)
+    console.log(newTasks)
+    if(newTasks){
+      setTasks(newTasks)
+    }
+  }
+  const handleDeleteTask = (taskId:number)=>{
+    const consent = window.confirm(`Are your sure you want to delete This Task? TaskId: ${taskId}`)
+    if(consent){
+      const newTasks = tasks?.filter(task=>task.taskId !== taskId);
+      if(newTasks){
+        setTasks(newTasks)
+      }
+    }
+  }
   return (
     <div>
-        <h2 className="text-4xl font-bold text-purple-400">
-            My tasks
-        </h2>
+        <Header>My Tasks</Header>
         {
-            tasks?.length && <h2 className="text-3xl text-blue-400">Hello</h2>
+            tasks?.length && 
+            <div className="grid grid-cols-3 gap-4">
+              {
+              tasks.map(task=>{
+                return <>
+                  
+                    <TaskCard task={task} handleTaskCompleted={handleTaskCompleted} handleDeleteTask={handleDeleteTask}></TaskCard>
+                </>
+              })
+              }
+              </div>
+              || <p className="text-3xl text-center">No task remaining</p>
+            
         }
     </div>
   )

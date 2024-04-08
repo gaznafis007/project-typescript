@@ -4,6 +4,7 @@ interface ITask {
     taskName: string,
     taskDescription:string,
     taskUrgency: "immediate" | "urgent" | "necessary" | "not important"
+    taskId: number
   }
   type Tasks =ITask[]
 const TaskForm = ({setTasks, tasks}:{setTasks:React.Dispatch<React.SetStateAction<Tasks | null>>, tasks:Tasks | null}) => {
@@ -13,11 +14,12 @@ const TaskForm = ({setTasks, tasks}:{setTasks:React.Dispatch<React.SetStateActio
         const form = event.target as HTMLFormElement;
         const taskName:string = form.taskName.value
         const taskDescription:string = form.taskDescription.value
-        const taskUrgency: "immediate" | "urgent" | "necessary" | "not important" = form.taskName.value
+        const taskUrgency: "immediate" | "urgent" | "necessary" | "not important" = form.taskUrgency.value
         const task = {
             taskName,
             taskDescription,
-            taskUrgency
+            taskUrgency,
+            taskId: tasks?.length && tasks.length+1 || 1
         }
         console.log(task, tasks)
         if(tasks){

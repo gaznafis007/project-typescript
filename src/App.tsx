@@ -7,7 +7,8 @@ import MyTasks from './Components/MyTasks/MyTasks'
 interface ITask {
   taskName: string,
   taskDescription:string,
-  taskUrgency: "immediate" | "urgent" | "necessary" | "not important"
+  taskUrgency: "immediate" | "urgent" | "necessary" | "not important",
+  taskId: number
 }
 type Tasks =ITask[]
 function App() {
@@ -16,7 +17,7 @@ function App() {
   return (
     <>
       <div>
-        <MyTasks tasks={tasks}/>
+        <MyTasks tasks={tasks} setTasks={setTasks}/>
         <AddTask setTasks={setTasks} tasks={tasks} />
       </div>
     </>
