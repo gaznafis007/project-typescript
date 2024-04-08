@@ -1,5 +1,7 @@
 
 import './App.css'
+import AddTask from './Components/AddTask/AddTask'
+import MyTasks from './Components/MyTasks/MyTasks'
 
 function App() {
   
@@ -7,9 +9,8 @@ function App() {
   return (
     <>
       <div>
-        <h1 className="text-5xl text-center text-blue-600">
-        Task-manager project is coming
-        </h1>
+        <MyTasks/>
+        <AddTask/>
       </div>
     </>
   )
