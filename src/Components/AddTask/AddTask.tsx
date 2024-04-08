@@ -1,11 +1,19 @@
 import Header from "../Header/Header"
+import TaskForm from "../TaskForm/TaskForm"
 
-const AddTask = () => {
+interface ITask {
+    taskName: string,
+    taskDescription:string,
+    taskUrgency: "immediate" | "urgent" | "necessary" | "not important"
+  }
+  type Tasks =ITask[]
+const AddTask = ({setTasks, tasks}: {setTasks:React.Dispatch<React.SetStateAction<Tasks | null>>, tasks: Tasks | null}) => {
   return (
     <div>
         <Header>
             Add Tasks
         </Header>
+        <TaskForm setTasks={setTasks} tasks={tasks}></TaskForm>
     </div>
   )
 }
