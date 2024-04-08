@@ -12,8 +12,8 @@ interface ITask {
 const MyTasks = ({tasks, setTasks}:{tasks: Tasks | null, setTasks: React.Dispatch<React.SetStateAction<Tasks | null>>}) => {
   const handleTaskCompleted = (taskId:number) =>{
     const newTasks = tasks?.filter(task=>task.taskId !== taskId)
-    console.log(newTasks)
     if(newTasks){
+      window.alert("Congratulation! You completed the task.")
       setTasks(newTasks)
     }
   }
